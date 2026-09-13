@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React Currency Converter - Complete Study Notes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+    @page {
+      size: A4;
+      margin: 14mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #1e293b;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 20px;
+      font-size: 13.5px;
+    }
+
+    .header-banner {
+      background: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa);
+      color: white;
+      padding: 28px 24px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+    }
+
+    .header-banner h1 {
+      margin: 0 0 6px 0;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .header-banner p {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.92;
+      font-weight: 400;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #0f172a;
+      font-size: 18px;
+      font-weight: 700;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 6px;
+      margin-top: 28px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h3 {
+      color: #1e3a8a;
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    p, li {
+      color: #334155;
+    }
+
+    ul, ol {
+      padding-left: 20px;
+      margin-top: 6px;
+      margin-bottom: 12px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 14px;
+      border-radius: 8px;
+      font-family: 'Fira Code', Consolas, monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      line-height: 1.5;
+      margin: 10px 0 14px 0;
+      border: 1px solid #1e293b;
+    }
+
+    code {
+      font-family: 'Fira Code', Consolas, monospace;
+      background: #f1f5f9;
+      color: #2563eb;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    .comment { color: #94a3b8; font-style: italic; }
+    .keyword { color: #f472b6; font-weight: 600; }
+    .function { color: #60a5fa; }
+    .string { color: #a7f3d0; }
+    .variable { color: #fde047; }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      page-break-inside: avoid;
+    }
+
+    .card-title {
+      font-weight: 700;
+      color: #1e40af;
+      font-size: 14px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .alert-box {
+      border-left: 4px solid #3b82f6;
+      background: #eff6ff;
+      padding: 12px 14px;
+      border-radius: 0 8px 8px 0;
+      margin: 12px 0;
+      page-break-inside: avoid;
+    }
+
+    .alert-box.warning {
+      border-left-color: #f59e0b;
+      background: #fffbeb;
+    }
+
+    .alert-box.success {
+      border-left-color: #10b981;
+      background: #ecfdf5;
+    }
+
+    .alert-title {
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .alert-box.warning .alert-title { color: #b45309; }
+    .alert-box .alert-title { color: #1d4ed8; }
+    .alert-box.success .alert-title { color: #047857; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 12.5px;
+      page-break-inside: avoid;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .diagram {
+      background: #f1f5f9;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+      font-family: monospace;
+      font-size: 12px;
+      margin: 12px 0;
+      page-break-inside: avoid;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header-banner">
+    <div class="badge">React Mastery &amp; Architecture Notes</div>
+    <h1>Currency Converter Project - Deep Dive Guide</h1>
+    <p>A beginner-friendly, crystal-clear explanation of Custom Hooks, Component Reusability, and State Orchestration.</p>
+  </div>
+
+  <!-- SECTION 1: THE BIG PICTURE -->
+  <h2>1. The Big Picture: Architecture &amp; Why We Split Code</h2>
+  <p>
+    When you build an application in React, you should never write all your code in one giant file. Instead, we divide responsibilities into three distinct layers:
+  </p>
+
+  <div class="diagram">
++-------------------------------------------------------------------------+
+|                  API (Live Currency Rates on Web)                       |
++-------------------------------------------------------------------------+
+                                     │ (fetches exchange rates)
+                                     ▼
++-------------------------------------------------------------------------+
+|        1. CUSTOM HOOK (useCurrencyInfo.js) - The Data Supplier          |
+|    - Calls fetch() to get rates object: { inr: 83.5, eur: 0.92, ... }    |
+|    - Updates automatically when selected currency changes               |
++-------------------------------------------------------------------------+
+                                     │ (provides data to parent)
+                                     ▼
++-------------------------------------------------------------------------+
+|          2. PARENT COMPONENT (App.jsx) - The Master Brain               |
+|    - Holds state: amount, from ("usd"), to ("inr"), convertedAmount     |
+|    - Calculates: convertedAmount = amount * rates[to]                   |
+|    - Swaps: flips "from" &lt;--&gt; "to" and values                           |
++-------------------------------------------------------------------------+
+                 │                                         │
+     (passes props for "From")                 (passes props for "To")
+                 ▼                                         ▼
++---------------------------------+       +-------------------------------+
+|  3. CHILD (InputBox - "From")   |       |  3. CHILD (InputBox - "To")   |
+|   - Amount input (editable)     |       |   - Amount input (disabled)   |
+|   - Currency dropdown ("USD")   |       |   - Currency dropdown ("INR") |
++---------------------------------+       +-------------------------------+
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>File</th>
+        <th>Type</th>
+        <th>Primary Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>useCurrencyInfo.js</strong></td>
+        <td>Custom Hook (Function)</td>
+        <td>Fetches API data and manages rates state. Doesn't care about HTML/UI.</td>
+      </tr>
+      <tr>
+        <td><strong>InputBox.jsx</strong></td>
+        <td>Reusable UI Component</td>
+        <td>Renders a single input card. Used twice (for "From" and "To").</td>
+      </tr>
+      <tr>
+        <td><strong>App.jsx</strong></td>
+        <td>Parent Component</td>
+        <td>Holds the core state, does the conversion math, and ties everything together.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 2: USECURRENCYINFO -->
+  <h2>2. Deep Dive: <code>useCurrencyInfo.js</code> (Custom Hook)</h2>
+
+  <h3>Why was this created instead of writing fetch inside App.jsx?</h3>
+  <ul>
+    <li><strong>Separation of Concerns:</strong> UI components should only handle user interaction. Data-fetching logic belongs in a hook.</li>
+    <li><strong>Reusability:</strong> If you build a dashboard or header tomorrow that also needs currency rates, you can call <code>useCurrencyInfo('usd')</code> in 1 line without rewriting <code>fetch</code> and <code>useEffect</code>.</li>
+    <li><strong>Clean Code:</strong> It keeps <code>App.jsx</code> short, readable, and easy to maintain.</li>
+  </ul>
+
+  <h3>The Complete Code:</h3>
+  <pre><code><span class="keyword">import</span> { useEffect, useState } <span class="keyword">from</span> <span class="string">"react"</span>;
+
+<span class="keyword">function</span> <span class="function">useCurrencyInfo</span>(<span class="variable">currency</span>) {
+    <span class="comment">// 1. State to store the fetched currency rates object</span>
+    <span class="keyword">const</span> [data, setData] = <span class="function">useState</span>({});
+
+    <span class="comment">// 2. useEffect runs whenever the 'currency' argument changes</span>
+    <span class="function">useEffect</span>(() =&gt; {
+        <span class="function">fetch</span>(<span class="string">`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/<span class="variable">${currency}</span>.json`</span>)
+            .<span class="function">then</span>((res) =&gt; res.<span class="function">json</span>())              <span class="comment">// Convert stream to JSON</span>
+            .<span class="function">then</span>((res) =&gt; <span class="function">setData</span>(res[currency]))  <span class="comment">// Save only the rates dictionary</span>
+    }, [currency]);                                  <span class="comment">// Dependency array</span>
+
+    <span class="comment">// 3. Return the rates data</span>
+    <span class="keyword">return</span> data;
+}
+
+<span class="keyword">export default</span> useCurrencyInfo;</code></pre>
+
+  <div class="card">
+    <div class="card-title">&#128161; Why is it <code>setData(res[currency])</code> and NOT <code>setData(res)</code>?</div>
+    <p>The API response looks like this:</p>
+    <pre><code>{
+  "date": "2026-09-12",
+  "usd": {
+    "inr": 83.5,
+    "eur": 0.92,
+    "jpy": 145.2
+  }
+}</code></pre>
+    <p>
+      Notice that the exchange rates are inside <code>res["usd"]</code> (or <code>res[currency]</code>). If you wrote <code>setData(res)</code>, your state would contain <code>"date"</code> and <code>"usd"</code> instead of currency rates, breaking both the dropdown and math!
+    </p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 3: INPUTBOX COMPONENT -->
+  <h2>3. Deep Dive: <code>InputBox.jsx</code> (Reusable Component)</h2>
+
+  <h3>Why was this component created?</h3>
+  <p>
+    Look at your currency converter screen:
+  </p>
+  <ul>
+    <li>The <strong>"From" card</strong> has an amount input box and a currency selector.</li>
+    <li>The <strong>"To" card</strong> has an amount input box and a currency selector.</li>
+  </ul>
+  <p>
+    They look identical! In standard HTML, you would copy-paste 40 lines of HTML twice. In React, you build <strong>ONE reusable template</strong> (<code>InputBox</code>) and use it twice by passing different <strong>props</strong>.
+  </p>
+
+  <h3>Props Explained in Detail:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Prop Name</th>
+        <th>Default</th>
+        <th>What It Does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>label</code></td>
+        <td>-</td>
+        <td>Displays text like <strong>"From"</strong> or <strong>"To"</strong> above the input.</td>
+      </tr>
+      <tr>
+        <td><code>amount</code></td>
+        <td>-</td>
+        <td>The number currently displayed in the number input.</td>
+      </tr>
+      <tr>
+        <td><code>onAmountChange</code></td>
+        <td>-</td>
+        <td>Function called when the user types a new number. Tells the parent to update state.</td>
+      </tr>
+      <tr>
+        <td><code>onCurrencyChange</code></td>
+        <td>-</td>
+        <td>Function called when the user selects a new currency in the dropdown.</td>
+      </tr>
+      <tr>
+        <td><code>currencyOptions</code></td>
+        <td><code>[]</code></td>
+        <td>Array of currency strings: <code>["usd", "inr", "eur", ...]</code> used to generate options.</td>
+      </tr>
+      <tr>
+        <td><code>selectedCurrency</code></td>
+        <td><code>"usd"</code></td>
+        <td>The currency currently active in the dropdown.</td>
+      </tr>
+      <tr>
+        <td><code>amountDisable</code></td>
+        <td><code>false</code></td>
+        <td>If <code>true</code>, locks the amount input so user cannot type (used for the "To" result box).</td>
+      </tr>
+      <tr>
+        <td><code>currencyDisable</code></td>
+        <td><code>false</code></td>
+        <td>If <code>true</code>, locks the dropdown.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Important Techniques Inside <code>InputBox.jsx</code>:</h3>
+
+  <div class="alert-box">
+    <div class="alert-title">1. What is <code>useId()</code> doing?</div>
+    <pre><code><span class="keyword">const</span> amountInputId = <span class="function">useId</span>();
+...
+&lt;label htmlFor={amountInputId}&gt;{label}&lt;/label&gt;
+&lt;input id={amountInputId} ... /&gt;</code></pre>
+    <p>
+      <code>useId()</code> generates a unique string (e.g. <code>:r1:</code>, <code>:r2:</code>) guaranteed to be unique across renders. It connects the <code>&lt;label&gt;</code> with the <code>&lt;input&gt;</code> for accessibility and allows clicking the label to automatically focus the input.
+    </p>
+  </div>
+
+  <div class="alert-box success">
+    <div class="alert-title">2. Safe Function Invocation: <code>onAmountChange &amp;&amp; onAmountChange(...)</code></div>
+    <pre><code>onChange={(e) =&gt; onAmountChange &amp;&amp; onAmountChange(Number(e.target.value))}</code></pre>
+    <p>
+      The <code>&amp;&amp;</code> check prevents app crashes if the parent forgot to pass an <code>onAmountChange</code> prop. Also, <code>Number(e.target.value)</code> converts the raw text input into a true numeric value.
+    </p>
+  </div>
+
+  <div class="alert-box warning">
+    <div class="alert-title">3. Why use <code>key={currency}</code> in the loop?</div>
+    <pre><code>{currencyOptions.map((currency) =&gt; (
+    &lt;option key={currency} value={currency}&gt;
+        {currency}
+    &lt;/option&gt;
+))}</code></pre>
+    <p>
+      React's Virtual DOM requires a unique <code>key</code> on repeated items. It allows React to identify which items have changed, added, or removed without re-rendering the entire list.
+    </p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 4: APP.JSX -->
+  <h2>4. Deep Dive: <code>App.jsx</code> (The Orchestrator)</h2>
+  <p>
+    <code>App.jsx</code> is the parent component that coordinates the entire app. It controls 4 states and 2 operations:
+  </p>
+
+  <h3>The State Variables:</h3>
+  <pre><code><span class="keyword">const</span> [amount, setAmount] = <span class="function">useState</span>(0);                   <span class="comment">// Input amount to convert (e.g., 100)</span>
+<span class="keyword">const</span> [from, setFrom] = <span class="function">useState</span>(<span class="string">"usd"</span>);                   <span class="comment">// Source currency</span>
+<span class="keyword">const</span> [to, setTo] = <span class="function">useState</span>(<span class="string">"inr"</span>);                       <span class="comment">// Destination currency</span>
+<span class="keyword">const</span> [convertedAmount, setConvertedAmount] = <span class="function">useState</span>(0); <span class="comment">// Output result</span></code></pre>
+
+  <h3>Hook Integration &amp; Options Generation:</h3>
+  <pre><code><span class="comment">// 1. Call our custom hook with the base currency:</span>
+<span class="keyword">const</span> currencyInfo = <span class="function">useCurrencyInfo</span>(from);
+
+<span class="comment">// 2. Extract keys from the rates object into an array:</span>
+<span class="keyword">const</span> currencyOptions = Object.<span class="function">keys</span>(currencyInfo);
+<span class="comment">// Result: ["inr", "eur", "gbp", "cad", "aud", ...]</span></code></pre>
+
+  <h3>The Two Main Actions:</h3>
+
+  <div class="card">
+    <div class="card-title">&#128260; 1. The Swap Logic:</div>
+    <pre><code><span class="keyword">const</span> <span class="function">swap</span> = () =&gt; {
+    setFrom(to);                 <span class="comment">// Currency "from" takes the value of "to"</span>
+    setTo(from);                 <span class="comment">// Currency "to" takes the value of "from"</span>
+    setAmount(convertedAmount);  <span class="comment">// Amount gets the converted value</span>
+    setConvertedAmount(amount);   <span class="comment">// Converted amount gets original amount</span>
+};</code></pre>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#128225; 2. The Conversion Calculation:</div>
+    <pre><code><span class="keyword">const</span> <span class="function">convert</span> = () =&gt; {
+    <span class="comment">// Math: Multiply user amount by destination currency rate:</span>
+    <span class="comment">// e.g., 10 * currencyInfo["inr"] (which is 83.5) = 835</span>
+    setConvertedAmount(amount * currencyInfo[to]);
+};</code></pre>
+  </div>
+
+  <h3>How App.jsx renders both InputBoxes:</h3>
+  <pre><code>&lt;form onSubmit={(e) =&gt; { e.preventDefault(); convert(); }}&gt;
+
+    {/* FROM BOX */}
+    &lt;InputBox
+        label=<span class="string">"From"</span>
+        amount={amount}
+        onAmountChange={setAmount}
+        onCurrencyChange={setFrom}
+        currencyOptions={currencyOptions}
+        selectedCurrency={from}
+    /&gt;
+
+    {/* SWAP BUTTON */}
+    &lt;button type=<span class="string">"button"</span> onClick={swap}&gt;swap&lt;/button&gt;
+
+    {/* TO BOX */}
+    &lt;InputBox
+        label=<span class="string">"To"</span>
+        amount={convertedAmount}
+        currencyOptions={currencyOptions}
+        onCurrencyChange={setTo}
+        selectedCurrency={to}
+        amountDisable <span class="comment">/* Read only! User cannot type output amount */</span>
+    /&gt;
+
+    &lt;button type=<span class="string">"submit"</span>&gt;
+        Convert {from.toUpperCase()} to {to.toUpperCase()}
+    &lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+  <!-- SECTION 5: STEP-BY-STEP USER STORY -->
+  <h2>5. Step-by-Step Execution Lifecycle</h2>
+  <ol>
+    <li><strong>Initial Render:</strong> App loads. <code>from</code> is <code>"usd"</code>. <code>useCurrencyInfo("usd")</code> runs its <code>fetch()</code>.</li>
+    <li><strong>API Response:</strong> Data arrives. <code>setData(res["usd"])</code> updates the hook's state.</li>
+    <li><strong>Re-render:</strong> <code>currencyOptions</code> now holds hundreds of currencies. Both dropdowns populate with options.</li>
+    <li><strong>User Input:</strong> User enters <code>50</code> in the "From" input. <code>onAmountChange</code> fires &rarr; <code>setAmount(50)</code> updates <code>amount</code>.</li>
+    <li><strong>User Converts:</strong> User clicks <strong>"Convert USD to INR"</strong> &rarr; Form runs <code>convert()</code> &rarr; <code>setConvertedAmount(50 * 83.5)</code> &rarr; "To" box displays <code>4175</code>!</li>
+  </ol>
+
+</body>
+</html>
